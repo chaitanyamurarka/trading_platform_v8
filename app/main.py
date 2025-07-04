@@ -26,8 +26,8 @@ app = FastAPI(
     title="Trading Platform API",
     description="Backend API for historical data, live data feeds, and strategy execution.",
     version="2.0.0", # Version bump
-    # docs_url=None,
-    # redoc_url=None
+    docs_url="/docs",
+    redoc_url="/redoc"
 )
 
 # --- Static File Serving ---

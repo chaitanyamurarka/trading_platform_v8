@@ -1,10 +1,10 @@
 
 from typing import List, Dict
-from app.schemas import RegressionRequest, RegressionResult, TimeframeRegressionResult, Interval
 from app.services.historical_service import get_historical_data
 import numpy as np
 from scipy import stats
 from datetime import datetime, timedelta
+from app.schemas import RegressionRequest, RegressionResult, TimeframeRegressionResult, Interval, DataType
 
 class RegressionService:
     async def calculate_regression(self, request: RegressionRequest) -> List[TimeframeRegressionResult]:
@@ -29,7 +29,7 @@ class RegressionService:
                     start_time=start_time,
                     end_time=end_time,
                     timezone="UTC",
-                    data_type="regular"
+                    data_type=DataType.REGULAR
                 )
             except Exception as e:
                 # Handle cases where no data is returned for a timeframe
