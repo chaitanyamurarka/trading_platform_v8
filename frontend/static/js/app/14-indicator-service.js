@@ -2,8 +2,7 @@
 import { state } from './2-state.js';
 import * as elements from './1-dom-elements.js';
 import { fetchRegressionData } from '../api.js';
-import { populateRegressionTable } from './4-ui-helpers.js';
-import { showToast } from './4-ui-helpers.js';
+import { populateRegressionTable, showToast } from './4-ui-helpers.js';
 
 /**
  * Gathers settings from the UI, calls the regression API,
@@ -58,7 +57,7 @@ export async function runRegressionAnalysis() {
         // 3. Call API
         const results = await fetchRegressionData(requestBody);
         state.regressionResults = results;
-        state.isIndicatorActive = true; // <-- ADD THIS LINE
+        state.isIndicatorActive = true; 
 
         // 4. Populate table
         populateRegressionTable(results);
@@ -77,5 +76,17 @@ export async function runRegressionAnalysis() {
         if (elements.indicatorModal.open) {
             elements.indicatorModal.close();
         }
+    }
+}
+
+/**
+ * NEW: Removes the regression analysis from the chart.
+ */
+export function removeRegressionAnalysis() {
+    state.resetIndicatorState();
+    populateRegressionTable(null); // This will hide the table
+    showToast('Indicator removed.', 'info');
+    if (elements.indicatorModal.open) {
+        elements.indicatorModal.close();
     }
 }

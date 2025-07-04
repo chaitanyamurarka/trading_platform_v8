@@ -52,6 +52,7 @@ export const sidebarOverlay = document.getElementById('sidebar-overlay');
 export const indicatorModal = document.getElementById('indicator_modal');
 export const indicatorSelect = document.getElementById('indicator-select');
 export const indicatorApplyBtn = document.getElementById('indicator-apply-btn');
+export const indicatorRemoveBtn = document.getElementById('indicator-remove-btn');
 export const regressionLengthInput = document.getElementById('indicator-regression-length');
 export const lookbackPeriodsInput = document.getElementById('indicator-lookback-periods');
 export const timeframesContainer = document.getElementById('indicator-timeframes'); // <-- MODIFIED
