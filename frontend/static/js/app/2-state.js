@@ -55,6 +55,14 @@ export const state = {
     // NEW: Available symbols from backend
     availableSymbols: [],
 
+        // NEW: Indicator State
+    regressionSettings: {
+        length: 4,
+        lookbackPeriods: [0, 1, 2, 3, 4, 5],
+        timeframes: ['10s', '30s', '1m', '5m']
+    },
+    regressionResults: null,
+
     // Helper method to get current chart data based on candle type
     getCurrentChartData() {
         // --- FIX START ---

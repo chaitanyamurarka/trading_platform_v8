@@ -20,7 +20,8 @@
 <body class="bg-base-200">
     <div id="sidebar-overlay" class="fixed inset-0 hidden"></div>
 
-    <div class="flex h-screen overflow-hidden">
+    <!-- The root flex container now allows content to overflow vertically -->
+    <div class="flex h-screen">
         <aside id="sidebar" class="flex flex-col bg-base-100 px-4 py-8">
             <h2 class="text-3xl font-semibold text-primary">EigenKor</h2>
             <div class="mt-8">
@@ -39,12 +40,6 @@
                     <div class="mb-4">
                         <label for="interval" class="text-sm">Interval</label>
                         <select id="interval" class="select select-bordered select-sm w-full">
-                            <!-- <optgroup label="Tick-Based">
-                                <option value="1tick">1 Tick</option>
-                                <option value="10tick">10 Ticks</option>
-                                <option value="100tick">100 Ticks</option>
-                                <option value="1000tick">1000 Ticks</option>
-                            </optgroup> -->
                             <optgroup label="Seconds">
                                 <option value="1s">1 Second</option>
                                 <option value="5s">5 Seconds</option>
@@ -79,8 +74,9 @@
             </div>
         </aside>
 
-        <main id="main-content" class="flex-1 flex flex-col">
-            <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 p-2 h-auto md:h-16 md:flex-nowrap md:py-0 bg-base-100 border-b border-base-300">
+        <!-- The main content area is now the primary scrollable container -->
+        <main id="main-content" class="flex-1 flex flex-col overflow-y-auto">
+            <div class="flex flex-wrap items-center justify-between gap-x-4 gap-y-2 p-2 h-auto md:h-16 md:flex-nowrap md:py-0 bg-base-100 border-b border-base-300 sticky top-0 z-30">
                 <div class="flex items-center justify-between h-auto md:h-16 bg-base-100 px-4 border-b border-base-300">
                     
                     <div class="flex items-center flex-wrap gap-x-4 gap-y-2 py-2">
@@ -98,21 +94,8 @@
                         <select id="timezone" class="select select-bordered select-sm">
                             <option value="Etc/UTC">UTC</option>
                             <option value="Europe/London">London</option>
-                            <option value="Europe/Paris">Paris</option>
-                            <option value="Europe/Berlin">Berlin</option>
-                            <option value="Europe/Moscow">Moscow</option>
-                            <option value="Asia/Dubai">Dubai</option>
-                            <option value="Asia/Kolkata">Kolkata</option>
-                            <option value="Asia/Singapore">Singapore</option>
-                            <option value="Asia/Hong_Kong">Hong Kong</option>
-                            <option value="Asia/Tokyo">Tokyo</option>
-                            <option value="Australia/Sydney">Sydney</option>
                             <option value="America/New_York" selected>New York</option>
-                            <option value="America/Chicago">Chicago</option>
-                            <option value="America/Los_Angeles">Los Angeles</option>
-                            <option value="America/Toronto">Toronto</option>
-                            <option value="America/Sao_Paulo">Sao Paulo</option>
-                            <option value="Pacific/Honolulu">Honolulu</option>
+                            <option value="Asia/Kolkata">Kolkata</option>
                         </select>
                         
                         <div class="form-control">
@@ -128,6 +111,8 @@
                         </select>
                         
                         <button id="screenshot-btn" class="btn btn-sm btn-ghost"><i class="fas fa-camera"></i></button>
+                        <!-- NEW: Indicators Button -->
+                        <button class="btn btn-sm btn-ghost" onclick="indicator_modal.showModal()"><i class="fas fa-chart-bar"></i> Indicators</button>
                         <button class="btn btn-sm btn-ghost" onclick="settings_modal.showModal()"><i class="fas fa-cog"></i></button>
                     </div>
 
@@ -138,16 +123,14 @@
                     </label>
                 </div>                
             </div>
-            <div class="flex-1 p-1">
-                <div class="card bg-base-100 shadow-xl rounded-box flex-grow relative h-full">
+            <div class="flex-1 p-1 flex flex-col min-h-[400px]"> <!-- Ensure chart area has a min-height and is a flex column -->
+                <div class="card bg-base-100 shadow-xl rounded-box flex-grow relative h-full flex-1">
                     <div id="data-legend" class="absolute top-2 left-2 z-10 p-2 bg-base-200 bg-opacity-70 rounded-md text-xs pointer-events-none hidden"></div>
                     <div class="chart-wrapper">
                         <div id="chartContainer" class="w-full h-full relative">
                             <div id="loadingIndicator" class="absolute inset-0 flex items-center justify-center bg-base-100 bg-opacity-50 z-20" style="display: none;">
                                 <span class="loading loading-spinner loading-lg"></span>
                             </div>
-                            <div id="data-legend" style="display: none;">
-                                </div>
                         </div>
                     </div>
                 </div>
@@ -167,6 +150,19 @@
                         <button id="scaling-auto-btn" class="btn btn-sm join-item btn-active" title="Automatic Scaling">Auto</button>
                         <button id="scaling-linear-btn" class="btn btn-sm join-item" title="Linear Scaling">Linear</button>
                     </div>
+                </div>
+            </div>
+
+            <!-- NEW: Regression Results Table -->
+            <div id="regression-table-container" class="p-2 bg-base-100">
+                <h3 class="font-bold text-lg mb-2 px-2">Linear Regression Analysis</h3>
+                <div class="overflow-x-auto rounded-lg border border-base-300">
+                    <table id="regression-table" class="table table-zebra table-sm w-full">
+                        <thead></thead>
+                        <tbody>
+                            <tr><td colspan="10" class="text-center p-4">No indicators applied. Use the 'Indicators' button to run an analysis.</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
@@ -213,7 +209,48 @@
                     <div class="form-control"><label class="label"><span class="label-text">Down Color</span></label><input type="color" id="setting-vol-down-color" class="input input-sm"></div>
                 </div>
             </div>
+        </div>
+        <form method="dialog" class="modal-backdrop"><button>close</button></form>
+    </dialog>
 
+    <!-- NEW: Indicator Modal -->
+    <dialog id="indicator_modal" class="modal">
+        <div class="modal-box w-11/12 max-w-2xl">
+            <h3 class="font-bold text-lg">Indicator Settings</h3>
+            <div class="py-4 space-y-4">
+                <div class="form-control">
+                    <label class="label"><span class="label-text">Indicator</span></label>
+                    <select id="indicator-select" class="select select-bordered select-sm">
+                        <option value="linear_regression" selected>Linear Regression</option>
+                    </select>
+                </div>
+                <div id="linear-regression-settings">
+                    <div class="form-control">
+                        <label class="label"><span class="label-text">Regression Length</span></label>
+                        <input type="number" id="indicator-regression-length" value="4" class="input input-bordered input-sm">
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text">Lookback Periods (comma-separated)</span></label>
+                        <input type="text" id="indicator-lookback-periods" value="0,1,2,3,4,5" class="input input-bordered input-sm">
+                    </div>
+                    <div class="form-control">
+                        <label class="label"><span class="label-text">Timeframes</span></label>
+                        <select id="indicator-timeframes" class="select select-bordered select-sm" multiple size="6">
+                            <option value="10s" selected>10 Seconds</option>
+                            <option value="30s" selected>30 Seconds</option>
+                            <option value="45s">45 Seconds</option>
+                            <option value="1m" selected>1 Minute</option>
+                            <option value="5m" selected>5 Minutes</option>
+                            <option value="15m">15 Minutes</option>
+                            <option value="1h">1 Hour</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-action">
+                <button id="indicator-apply-btn" class="btn btn-primary">Apply</button>
+                <form method="dialog"><button class="btn">Close</button></form>
+            </div>
         </div>
         <form method="dialog" class="modal-backdrop"><button>close</button></form>
     </dialog>

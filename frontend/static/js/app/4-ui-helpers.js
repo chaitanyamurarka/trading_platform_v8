@@ -177,3 +177,74 @@ export function populateSymbolSelect(symbols) {
 }
 
 window.showToast = showToast;
+
+/**
+ * NEW: Populates the regression analysis results table.
+ * @param {object} data - The response data from the /regression API endpoint.
+ */
+export function populateRegressionTable(data) {
+    if (!elements.regressionTableHead || !elements.regressionTableBody) return;
+
+    if (!data) {
+        elements.regressionTableBody.innerHTML = '<tr><td colspan="10" class="text-center p-4">No data to display.</td></tr>';
+        return;
+    }
+
+    const { request_params, regression_results } = data;
+    if (!regression_results || regression_results.length === 0) {
+        elements.regressionTableBody.innerHTML = '<tr><td colspan="10" class="text-center p-4">No regression results returned for the selected parameters.</td></tr>';
+        return;
+    }
+
+    // --- Build Table Header ---
+    elements.regressionTableHead.innerHTML = ''; // Clear header
+    const headerRow = document.createElement('tr');
+    
+    let headers = ['Sr. No.', 'Timeframe'];
+    const lookbackHeaders = request_params.lookback_periods.map(p => `S[${p}]`);
+    headers.push(...lookbackHeaders);
+    headers.push('R-Value (Avg)');
+
+    headers.forEach(text => {
+        const th = document.createElement('th');
+        th.textContent = text;
+        headerRow.appendChild(th);
+    });
+    elements.regressionTableHead.appendChild(headerRow);
+
+    // --- Build Table Body ---
+    elements.regressionTableBody.innerHTML = ''; // Clear body
+    regression_results.forEach((timeframeResult, index) => {
+        const row = document.createElement('tr');
+        
+        row.insertCell().textContent = index + 1;
+        row.insertCell().textContent = timeframeResult.timeframe;
+
+        let totalRValue = 0;
+        let rValueCount = 0;
+
+        // Slope values for each lookback
+        request_params.lookback_periods.forEach(period => {
+            const slopeTd = row.insertCell();
+            const result = timeframeResult.results[period.toString()];
+            if (result) {
+                slopeTd.textContent = result.slope.toFixed(5);
+                slopeTd.className = result.slope > 0 ? 'text-success' : 'text-error';
+                totalRValue += Math.abs(result.r_value);
+                rValueCount++;
+            } else {
+                slopeTd.textContent = 'N/A';
+            }
+        });
+
+        // Average R-Value
+        const rValueTd = row.insertCell();
+        if (rValueCount > 0) {
+            const avgRValue = totalRValue / rValueCount;
+            rValueTd.textContent = avgRValue.toFixed(4);
+        } else {
+            rValueTd.textContent = 'N/A';
+        }
+        elements.regressionTableBody.appendChild(row);
+    });
+}
