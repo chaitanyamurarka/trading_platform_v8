@@ -2,13 +2,16 @@
 import { initiateSession, sendHeartbeat } from '../api.js';
 import { state } from './2-state.js';
 import { showToast } from './4-ui-helpers.js';
-// import { loadChartData } from './6-api-service.js';
+import { fetchAndPopulateSymbols } from './6-api-service.js';
 
 export async function startSession() {
     try {
         const sessionData = await initiateSession();
         state.sessionToken = sessionData.session_token;
         showToast('Session started.', 'info');
+
+        // Fetch symbols and load chart data now that we have a session token.
+        await fetchAndPopulateSymbols();
 
         // Start heartbeat to keep the session alive
         if (state.heartbeatIntervalId) clearInterval(state.heartbeatIntervalId);

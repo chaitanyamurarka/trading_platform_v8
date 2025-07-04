@@ -55,7 +55,8 @@ export const state = {
     // NEW: Available symbols from backend
     availableSymbols: [],
 
-        // NEW: Indicator State
+    // NEW: Indicator State
+    isIndicatorActive: false, // <-- ADD THIS LINE
     regressionSettings: {
         length: 4,
         lookbackPeriods: [0, 1, 2, 3, 4, 5],

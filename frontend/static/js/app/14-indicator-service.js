@@ -31,7 +31,10 @@ export async function runRegressionAnalysis() {
         return;
     }
 
-    state.regressionSettings.timeframes = Array.from(elements.timeframesSelect.selectedOptions).map(opt => opt.value);
+    // MODIFIED: Get selected timeframes from checkboxes
+    state.regressionSettings.timeframes = 
+        Array.from(elements.timeframesContainer.querySelectorAll('input[type="checkbox"]:checked'))
+             .map(cb => cb.value);
 
     if (state.regressionSettings.timeframes.length === 0) {
         showToast('Please select at least one timeframe.', 'error');
@@ -55,6 +58,7 @@ export async function runRegressionAnalysis() {
         // 3. Call API
         const results = await fetchRegressionData(requestBody);
         state.regressionResults = results;
+        state.isIndicatorActive = true; // <-- ADD THIS LINE
 
         // 4. Populate table
         populateRegressionTable(results);

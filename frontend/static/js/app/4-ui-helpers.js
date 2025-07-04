@@ -179,20 +179,22 @@ export function populateSymbolSelect(symbols) {
 window.showToast = showToast;
 
 /**
- * NEW: Populates the regression analysis results table.
+ * MODIFIED: Populates the regression analysis results table and controls its visibility.
  * @param {object} data - The response data from the /regression API endpoint.
  */
 export function populateRegressionTable(data) {
-    if (!elements.regressionTableHead || !elements.regressionTableBody) return;
+    if (!elements.regressionTableContainer || !elements.regressionTableHead || !elements.regressionTableBody) return;
 
     if (!data) {
         elements.regressionTableBody.innerHTML = '<tr><td colspan="10" class="text-center p-4">No data to display.</td></tr>';
+        elements.regressionTableContainer.classList.add('hidden'); // Hide container
         return;
     }
 
     const { request_params, regression_results } = data;
     if (!regression_results || regression_results.length === 0) {
         elements.regressionTableBody.innerHTML = '<tr><td colspan="10" class="text-center p-4">No regression results returned for the selected parameters.</td></tr>';
+        elements.regressionTableContainer.classList.remove('hidden'); // Show container with message
         return;
     }
 
@@ -247,4 +249,6 @@ export function populateRegressionTable(data) {
         }
         elements.regressionTableBody.appendChild(row);
     });
+
+    elements.regressionTableContainer.classList.remove('hidden'); // Show container with data
 }

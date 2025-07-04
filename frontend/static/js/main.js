@@ -7,7 +7,6 @@ import { recreateMainSeries } from './app/5-chart-drawing.js';
 import { startSession } from './app/10-session-manager.js';
 import { initializeAllEventListeners } from './app/7-event-listeners.js';
 import { responsiveHandler } from './app/8-responsive-handler.js';
-import { fetchAndPopulateSymbols } from './app/6-api-service.js';
 
 function initializeNewChartObject() {
     if (state.mainChart) state.mainChart.remove();
@@ -41,6 +40,5 @@ document.addEventListener('DOMContentLoaded', () => {
     // Start the session, which will trigger the initial data load
     startSession();
 
-    // Fetch and populate symbols
-    fetchAndPopulateSymbols();
+    // The call to fetchAndPopulateSymbols() is removed from here.
 });

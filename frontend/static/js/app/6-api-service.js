@@ -14,7 +14,12 @@ export async function fetchAndPopulateSymbols() {
         populateSymbolSelect(symbols);
         showToast(`Loaded ${symbols.length} symbols.`, 'success');
 
-        loadChartData()
+        // Only load chart data if there are symbols available
+        if (symbols && symbols.length > 0) {
+            loadChartData();
+        } else {
+            showToast('No symbols available to load chart.', 'warning');
+        }
     } catch (error) {
         console.error("Failed to fetch symbols:", error);
         showToast("Error loading symbols.", 'error');

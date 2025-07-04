@@ -48,13 +48,13 @@ export const menuToggle = document.getElementById('menu-toggle');
 export const sidebar = document.getElementById('sidebar');
 export const sidebarOverlay = document.getElementById('sidebar-overlay');
 
-// NEW: Indicator Elements
+// MODIFIED: Indicator Elements
 export const indicatorModal = document.getElementById('indicator_modal');
 export const indicatorSelect = document.getElementById('indicator-select');
 export const indicatorApplyBtn = document.getElementById('indicator-apply-btn');
 export const regressionLengthInput = document.getElementById('indicator-regression-length');
 export const lookbackPeriodsInput = document.getElementById('indicator-lookback-periods');
-export const timeframesSelect = document.getElementById('indicator-timeframes');
+export const timeframesContainer = document.getElementById('indicator-timeframes'); // <-- MODIFIED
 export const regressionTableContainer = document.getElementById('regression-table-container');
 export const regressionTable = document.getElementById('regression-table');
 export const regressionTableHead = regressionTable ? regressionTable.querySelector('thead') : null;
