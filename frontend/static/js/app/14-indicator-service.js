@@ -41,8 +41,9 @@ export async function runRegressionAnalysis() {
     }
 
     // 2. Build request body
+    const currentSymbol = elements.symbolSelect.value;
     const requestBody = {
-        symbol: elements.symbolSelect.value,
+        symbol: currentSymbol,
         exchange: elements.exchangeSelect.value,
         regression_length: state.regressionSettings.length,
         lookback_periods: state.regressionSettings.lookbackPeriods,
@@ -57,7 +58,8 @@ export async function runRegressionAnalysis() {
         // 3. Call API
         const results = await fetchRegressionData(requestBody);
         state.regressionResults = results;
-        state.isIndicatorActive = true; 
+        state.isIndicatorActive = true;
+        state.activeIndicatorSymbol = currentSymbol; // NEW: Store the symbol
 
         // 4. Populate table
         populateRegressionTable(results);

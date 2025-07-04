@@ -57,6 +57,7 @@ export const state = {
 
     // NEW: Indicator State
     isIndicatorActive: false,
+    activeIndicatorSymbol: null, // NEW: Track symbol when indicator was applied
     regressionSettings: {
         length: 4,
         lookbackPeriods: [0, 1, 2, 3, 4, 5],
@@ -64,12 +65,13 @@ export const state = {
     },
     regressionResults: null,
 
-    // NEW: Function to reset indicator state
+    // Update the resetIndicatorState function:
     resetIndicatorState() {
         this.isIndicatorActive = false;
+        this.activeIndicatorSymbol = null;
         this.regressionResults = null;
     },
-
+    
     // Helper method to get current chart data based on candle type
     getCurrentChartData() {
         // --- FIX START ---
