@@ -12,7 +12,7 @@ from .middleware.security_headers import SecurityHeadersMiddleware
 from .middleware.rate_limiting import RateLimitMiddleware 
 
 # --- NEW: Import the single unified router ---
-from .routers import unified_data_router
+from .routers import unified_data_router, regression_router
 
 # --- Connection Manager Lifecycle ---
 from .websocket_manager import startup_connection_manager, shutdown_connection_manager
@@ -26,8 +26,8 @@ app = FastAPI(
     title="Trading Platform API",
     description="Backend API for historical data, live data feeds, and strategy execution.",
     version="2.0.0", # Version bump
-    docs_url=None,
-    redoc_url=None
+    # docs_url=None,
+    # redoc_url=None
 )
 
 # --- Static File Serving ---
@@ -81,6 +81,7 @@ async def shutdown_event():
 
 # --- NEW: Include the single unified router ---
 app.include_router(unified_data_router.router)
+app.include_router(regression_router.router)
 
 # --- Root Endpoint ---
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)

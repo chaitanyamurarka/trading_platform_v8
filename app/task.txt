@@ -1,1 +1,244 @@
-Lets introduce a logging service which will store all the logs in a file named app.log. We will log everything like client ip address, request received from client, the step of operations we performed to fulfill the reuqest, the data pass and interchange between various functions, a summary of data sent to client. Keep it very professional and this should not create much added latency. We can have different log files, also the max size of a log file will be 1GB
+Now, lets add a Linear Regression Router , Services and more to the unicorn application
+
+It will receive a request containing Regression Length, Lookback Periods from current last candle and various timeframes as input
+
+Lets take an example : 
+Regression Length : 4 
+Lookback Periods from current last candle : 0,1,2,3,4,5,6
+Timeframes : 10s,30s,45s,1m,5m,15m
+
+Lets assume the server receives this request at 10:30am
+
+1. 10-second Timeframe (10s)
+Each candle = 10 seconds.
+•	Lookback Period 0:
+o	10:30:00 (current candle)
+o	10:29:50
+o	10:29:40
+o	10:29:30
+•	Lookback Period 1:
+o	10:29:50
+o	10:29:40
+o	10:29:30
+o	10:29:20
+•	Lookback Period 2:
+o	10:29:40
+o	10:29:30
+o	10:29:20
+o	10:29:10
+•	Lookback Period 3:
+o	10:29:30
+o	10:29:20
+o	10:29:10
+o	10:29:00
+•	Lookback Period 4:
+o	10:29:20
+o	10:29:10
+o	10:29:00
+o	10:28:50
+•	Lookback Period 5:
+o	10:29:10
+o	10:29:00
+o	10:28:50
+o	10:28:40
+•	Lookback Period 6:
+o	10:29:00
+o	10:28:50
+o	10:28:40
+o	10:28:30
+________________________________________
+2. 30-second Timeframe (30s)
+Each candle = 30 seconds.
+•	Lookback Period 0:
+o	10:30:00
+o	10:29:30
+o	10:29:00
+o	10:28:30
+•	Lookback Period 1:
+o	10:29:30
+o	10:29:00
+o	10:28:30
+o	10:28:00
+•	Lookback Period 2:
+o	10:29:00
+o	10:28:30
+o	10:28:00
+o	10:27:30
+•	Lookback Period 3:
+o	10:28:30
+o	10:28:00
+o	10:27:30
+o	10:27:00
+•	Lookback Period 4:
+o	10:28:00
+o	10:27:30
+o	10:27:00
+o	10:26:30
+•	Lookback Period 5:
+o	10:27:30
+o	10:27:00
+o	10:26:30
+o	10:26:00
+•	Lookback Period 6:
+o	10:27:00
+o	10:26:30
+o	10:26:00
+o	10:25:30
+________________________________________
+3. 45-second Timeframe (45s)
+Each candle = 45 seconds.
+•	Lookback Period 0:
+o	10:30:00
+o	10:29:15
+o	10:28:30
+o	10:27:45
+•	Lookback Period 1:
+o	10:29:15
+o	10:28:30
+o	10:27:45
+o	10:27:00
+•	Lookback Period 2:
+o	10:28:30
+o	10:27:45
+o	10:27:00
+o	10:26:15
+•	Lookback Period 3:
+o	10:27:45
+o	10:27:00
+o	10:26:15
+o	10:25:30
+•	Lookback Period 4:
+o	10:27:00
+o	10:26:15
+o	10:25:30
+o	10:24:45
+•	Lookback Period 5:
+o	10:26:15
+o	10:25:30
+o	10:24:45
+o	10:24:00
+•	Lookback Period 6:
+o	10:25:30
+o	10:24:45
+o	10:24:00
+o	10:23:15
+________________________________________
+4. 1-minute Timeframe (1m)
+Each candle = 1 minute.
+•	Lookback Period 0:
+o	10:30:00
+o	10:29:00
+o	10:28:00
+o	10:27:00
+•	Lookback Period 1:
+o	10:29:00
+o	10:28:00
+o	10:27:00
+o	10:26:00
+•	Lookback Period 2:
+o	10:28:00
+o	10:27:00
+o	10:26:00
+o	10:25:00
+•	Lookback Period 3:
+o	10:27:00
+o	10:26:00
+o	10:25:00
+o	10:24:00
+•	Lookback Period 4:
+o	10:26:00
+o	10:25:00
+o	10:24:00
+o	10:23:00
+•	Lookback Period 5:
+o	10:25:00
+o	10:24:00
+o	10:23:00
+o	10:22:00
+•	Lookback Period 6:
+o	10:24:00
+o	10:23:00
+o	10:22:00
+o	10:21:00
+________________________________________
+5. 5-minute Timeframe (5m)
+Each candle = 5 minutes.
+•	Lookback Period 0:
+o	10:30:00
+o	10:25:00
+o	10:20:00
+o	10:15:00
+•	Lookback Period 1:
+o	10:25:00
+o	10:20:00
+o	10:15:00
+o	10:10:00
+•	Lookback Period 2:
+o	10:20:00
+o	10:15:00
+o	10:10:00
+o	10:05:00
+•	Lookback Period 3:
+o	10:15:00
+o	10:10:00
+o	10:05:00
+o	10:00:00
+•	Lookback Period 4:
+o	10:10:00
+o	10:05:00
+o	10:00:00
+o	09:55:00
+•	Lookback Period 5:
+o	10:05:00
+o	10:00:00
+o	09:55:00
+o	09:50:00
+•	Lookback Period 6:
+o	10:00:00
+o	09:55:00
+o	09:50:00
+o	09:45:00
+________________________________________
+6. 15-minute Timeframe (15m)
+Each candle = 15 minutes.
+•	Lookback Period 0:
+o	10:30:00
+o	10:15:00
+o	10:00:00
+o	09:45:00
+•	Lookback Period 1:
+o	10:15:00
+o	10:00:00
+o	09:45:00
+o	09:30:00
+•	Lookback Period 2:
+o	10:00:00
+o	09:45:00
+o	09:30:00
+o	09:15:00
+•	Lookback Period 3:
+o	09:45:00
+o	09:30:00
+o	09:15:00
+o	09:00:00
+•	Lookback Period 4:
+o	09:30:00
+o	09:15:00
+o	09:00:00
+o	08:45:00
+•	Lookback Period 5:
+o	09:15:00
+o	09:00:00
+o	08:45:00
+o	08:30:00
+•	Lookback Period 6:
+o	09:00:00
+o	08:45:00
+o	08:30:00
+o	08:15:00
+________________________________________
+Summary
+•	For each lookback period (n), the calculation starts from (current time - n × candle duration) and goes 3 more steps back (since regression length = 4).
+•	The pattern is consistent across all timeframes.
+
+Now we will return the Slope Value and R Value for all of this. You need to see how Historical Service is accessing the data from influx db. You need to understand the data schema and data retrieval methods. Then we can prepare our code

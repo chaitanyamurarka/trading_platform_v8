@@ -141,3 +141,26 @@ class Symbol(BaseModel):
     """Schema for a trading symbol, including its exchange."""
     symbol: str
     exchange: str
+
+class RegressionRequest(BaseModel):
+    """Schema for a linear regression request."""
+    symbol: str = Field(..., description="The trading symbol to analyze.")
+    exchange: str = Field(..., description="The exchange where the symbol is traded.")
+    regression_length: int = Field(..., description="The number of candles to use for the regression calculation.")
+    lookback_periods: List[int] = Field(..., description="A list of lookback periods from the current candle.")
+    timeframes: List[Interval] = Field(..., description="A list of timeframes to perform the regression on.")
+
+class RegressionResult(BaseModel):
+    """Schema for a single linear regression result."""
+    slope: float = Field(..., description="The slope of the regression line.")
+    r_value: float = Field(..., description="The R-value of the regression.")
+
+class TimeframeRegressionResult(BaseModel):
+    """Schema for regression results for a single timeframe."""
+    timeframe: Interval
+    results: Dict[str, RegressionResult]
+
+class RegressionResponse(BaseModel):
+    """Schema for the response of a linear regression request."""
+    request_params: RegressionRequest
+    regression_results: List[TimeframeRegressionResult]
