@@ -172,7 +172,7 @@ export function populateSymbolSelect(symbols) {
     if (symbols.length > 0) {
         elements.symbolSelect.value = symbols[0].symbol;
         // Dispatch a change event to trigger any listeners (e.g., data loading)
-        elements.symbolSelect.dispatchEvent(new Event('change'));
+        // elements.symbolSelect.dispatchEvent(new Event('change'));
     }
 }
 
