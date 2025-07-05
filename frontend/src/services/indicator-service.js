@@ -4,7 +4,7 @@ import { getDomElements } from './1-dom-elements.js';
 
 const elements = getDomElements();
 import { fetchRegressionData } from '../api.js';
-import { populateRegressionTable, showToast } from './4-ui-helpers.js';
+import { populateRegressionTable, showToast } from '../utils/ui-helpers.js';
 
 /**
  * Gathers settings from the UI, calls the regression API,

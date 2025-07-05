@@ -3,7 +3,7 @@ import { state } from './2-state.js';
 import { getDomElements } from './1-dom-elements.js';
 
 const elements = getDomElements();
-import { showToast } from './4-ui-helpers.js';
+import { showToast } from '../utils/ui-helpers.js';
 
 let liveDataSocket = null;
 let haLiveDataSocket = null;

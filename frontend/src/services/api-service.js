@@ -6,7 +6,7 @@ import { showToast, populateSymbolSelect } from './4-ui-helpers.js';
 
 const elements = getDomElements();
 import { connectToLiveDataFeed, connectToLiveHeikinAshiData, disconnectFromAllLiveFeeds, processMessageBuffer } from './9-websocket-service.js';
-import { applyAutoscaling } from './13-drawing-toolbar-listeners.js';
+import { applyAutoscaling } from '../utils/drawing-toolbar-listeners.js';
 
 // NEW: Function to fetch and populate symbols
 export async function fetchAndPopulateSymbols() {

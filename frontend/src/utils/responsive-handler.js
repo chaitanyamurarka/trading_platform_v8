@@ -1,7 +1,7 @@
 // frontend/static/js/app/8-responsive-handler.js
 
 import { state } from './2-state.js';
-import { getDomElements } from './1-dom-elements.js';
+import { getDomElements } from './dom-elements.js';
 
 /**
  * Advanced responsive handler for TradingView-style dynamic adaptation

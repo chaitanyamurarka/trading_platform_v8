@@ -2,7 +2,7 @@
 import { initiateSession, sendHeartbeat } from '../api.js';
 import { state } from './2-state.js';
 import { showToast } from './4-ui-helpers.js';
-import { fetchAndPopulateSymbols } from './6-api-service.js';
+import { fetchAndPopulateSymbols } from './api-service.js';
 
 export async function startSession() {
     try {

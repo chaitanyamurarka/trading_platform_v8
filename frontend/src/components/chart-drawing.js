@@ -3,7 +3,7 @@ import { state } from './2-state.js';
 import { getDomElements } from './1-dom-elements.js';
 
 const elements = getDomElements();
-import { getSeriesOptions } from './3-chart-options.js';
+import { getSeriesOptions } from '../utils/chart-options.js';
 
 export function recreateMainSeries(type) {
     if (state.mainSeries) {

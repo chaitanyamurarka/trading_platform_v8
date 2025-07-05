@@ -1,7 +1,7 @@
 import { getDomElements } from './1-dom-elements.js';
 
 const elements = getDomElements();
-import { state } from './2-state.js';
+import { state } from './state.js';
 
 export function setupDrawingToolbarListeners() {
     if (!elements.toolTrendLineBtn) return; // Exit if drawing tools are not in the DOM

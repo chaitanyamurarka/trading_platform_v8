@@ -34,7 +34,7 @@ app = FastAPI(
 script_dir = os.path.dirname(__file__)
 frontend_dir = os.path.join(os.path.dirname(script_dir), "frontend")
 
-app.mount("/static", StaticFiles(directory=os.path.join(frontend_dir, "static")), name="static")
+app.mount("/static", StaticFiles(directory=os.path.join(frontend_dir,"public", "static")), name="static")
 app.mount("/dist", StaticFiles(directory=os.path.join(frontend_dir, "dist")), name="dist")
 
 # --- Middleware Configuration ---
@@ -87,7 +87,7 @@ app.include_router(regression_router.router)
 @app.get("/", response_class=HTMLResponse, include_in_schema=False)
 async def root():
     """Serves the main index.html file."""
-    index_path = os.path.join(frontend_dir, "index.html")
+    index_path = os.path.join(frontend_dir, "public","index.html")
     if os.path.exists(index_path):
         with open(index_path, "r") as f:
             return HTMLResponse(content=f.read())

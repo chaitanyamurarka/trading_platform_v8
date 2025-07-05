@@ -1,6 +1,6 @@
 // frontend/static/js/app/2-state.js
 
-import { getDomElements } from './1-dom-elements.js';
+import { getDomElements } from './dom-elements.js';
 
 const elements = getDomElements();
 

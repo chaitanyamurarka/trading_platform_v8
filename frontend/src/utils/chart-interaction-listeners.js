@@ -5,7 +5,7 @@ import { getDomElements } from './1-dom-elements.js';
 const elements = getDomElements();
 import { fetchAndPrependHeikinAshiChunk, 
     fetchAndPrependTickChunk, 
-    fetchAndPrependRegularCandleChunk } from './6-api-service.js';
+    fetchAndPrependRegularCandleChunk } from '../services/api-service.js';
 
 function formatPrice(price, decimals = 2) {
     if (price === null || price === undefined) return 'N/A';

@@ -2,7 +2,7 @@ import { getDomElements } from './1-dom-elements.js';
 
 const elements = getDomElements();
 import { state } from './2-state.js';
-import { runRegressionAnalysis, removeRegressionAnalysis } from './14-indicator-service.js';
+import { runRegressionAnalysis, removeRegressionAnalysis } from '../services/indicator-service.js';
 
 export function setupIndicatorListeners() {
     // Existing Apply button listener

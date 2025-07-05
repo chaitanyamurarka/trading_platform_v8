@@ -8,7 +8,7 @@ import { syncSettingsInputs, updateThemeToggleIcon, setAutomaticDateTime } from 
 import { recreateMainSeries } from './app/5-chart-drawing.js';
 import { startSession } from './app/10-session-manager.js';
 import { initializeAllEventListeners } from './app/7-event-listeners.js';
-import { responsiveHandler } from './app/8-responsive-handler.js';
+import { responsiveHandler } from '../utils/responsive-handler.js';
 
 function initializeNewChartObject() {
     if (state.mainChart) state.mainChart.remove();

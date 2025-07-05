@@ -6,7 +6,7 @@ import { state } from './2-state.js';
 import { applyTheme, syncSettingsInputs, showToast, setAutomaticDateTime } from './4-ui-helpers.js';
 import { takeScreenshot, recreateMainSeries, applySeriesColors, applyVolumeColors } from './5-chart-drawing.js';
 import { loadChartData } from './6-api-service.js';
-import { connectToLiveDataFeed, connectToLiveHeikinAshiData, disconnectFromAllLiveFeeds } from './9-websocket-service.js';
+import { connectToLiveDataFeed, connectToLiveHeikinAshiData, disconnectFromAllLiveFeeds } from '../services/websocket-service.js';
 
 export function setupUiListeners() {
     // --- MODIFICATION START ---
