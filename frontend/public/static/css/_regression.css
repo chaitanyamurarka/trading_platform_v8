@@ -1,0 +1,47 @@
+/* Regression table enhancements */
+#regression-table-container {
+    transition: all 0.3s ease-in-out;
+}
+
+#regression-table-container.hidden {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+#remove-regression-btn {
+    transition: all 0.2s ease;
+    color: var(--bc); /* Use base content color */
+}
+
+#remove-regression-btn:hover {
+    transform: scale(1.05);
+    background-color: rgba(var(--b3), 0.5);
+}
+
+/* Alternative color schemes - choose one: */
+/* Light blue version */
+
+#remove-regression-btn {
+    color: #60a5fa;
+}
+
+
+/* Light green version */
+/*
+#remove-regression-btn {
+    color: #86efac;
+}
+*/
+
+/* Light grey version */
+/*
+#remove-regression-btn {
+    color: #9ca3af;
+}
+*/
+
+/* Table row hover effect */
+#regression-table tbody tr:hover {
+    background-color: rgba(var(--b3), 0.5);
+    transition: background-color 0.2s ease;
+}

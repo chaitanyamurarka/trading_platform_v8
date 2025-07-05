@@ -1,0 +1,54 @@
+/* Responsive header */
+.navbar {
+    height: var(--header-height);
+    min-height: var(--header-height);
+    padding: 0 var(--responsive-padding);
+    flex-shrink: 0;
+    margin-bottom: var(--responsive-gap);
+}
+
+.navbar .flex-1 {
+    min-width: 0; /* Prevent flex item from growing too large */
+}
+
+.navbar .btn-ghost {
+    font-size: var(--font-size-responsive);
+    padding: 0.5rem;
+}
+
+/* Tablet Landscape (768px to 1023px) */
+@media (max-width: 1023px) and (min-width: 768px) {
+    .navbar .btn-ghost {
+        font-size: 0.875rem;
+    }
+}
+
+/* Tablet Portrait and Small Laptop (640px to 767px) */
+@media (max-width: 767px) and (min-width: 640px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        gap: 0.5rem;
+        padding: 0.5rem;
+    }
+}
+
+/* Mobile and very small screens (below 640px) */
+@media (max-width: 639px) {
+    .navbar {
+        flex-direction: column;
+        height: auto;
+        padding: 0.25rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .navbar .flex-1 {
+        width: 100%;
+        text-align: center;
+    }
+
+    .navbar .btn-ghost {
+        font-size: 0.75rem;
+        padding: 0.25rem;
+    }
+}

@@ -1,0 +1,73 @@
+/* Loading indicator responsive */
+#loadingIndicator {
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s ease-in-out;
+}
+
+/* Settings modal responsive */
+.modal-box {
+    width: min(90vw, 600px);
+    max-width: 90vw;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+/* Toast notifications responsive */
+#toast-container {
+    position: fixed;
+    bottom: var(--responsive-padding);
+    right: var(--responsive-padding);
+    z-index: 1000;
+    max-width: calc(100vw - 2 * var(--responsive-padding));
+}
+
+/* Utility classes for responsive behavior */
+.responsive-hide-sm {
+    display: block;
+}
+
+.responsive-hide-md {
+    display: block;
+}
+
+@media (max-width: 639px) {
+    .responsive-hide-sm {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .responsive-hide-md {
+        display: none !important;
+    }
+}
+
+/* Enhanced hover effects for better UX */
+.chart-controls select:hover,
+.chart-controls input:hover,
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+/* Print styles for better screenshots */
+@media print {
+    .container {
+        height: auto !important;
+        overflow: visible !important;
+    }
+
+    .chart-controls {
+        display: none !important;
+    }
+
+    .navbar {
+        display: none !important;
+    }
+
+    #chartContainer {
+        width: 100% !important;
+        height: 80vh !important;
+    }
+}

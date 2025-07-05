@@ -1,0 +1,94 @@
+/**
+ * Advanced Responsive Layout System
+ * TradingView-style dynamic adaptation
+ */
+
+/* Root variables for consistent spacing and sizing */
+:root {
+    --header-height: 4rem;
+    --toolbar-height: 3rem;
+    --sidebar-width: 250px;
+    --control-panel-height: auto;
+    --responsive-padding: clamp(0.5rem, 2vw, 1rem);
+    --responsive-gap: clamp(0.5rem, 1.5vw, 0.75rem);
+    --font-size-responsive: clamp(0.75rem, 2vw, 0.875rem);
+}
+
+/* Enhanced container system */
+.container {
+    max-width: none !important;
+    width: 100% !important;
+    height: 100vh !important;
+    padding: var(--responsive-padding) !important;
+    margin: 0 !important;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* Dynamic main layout */
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    gap: var(--responsive-gap);
+    overflow: hidden;
+}
+
+/* Responsive breakpoints */
+
+/* Large Desktop (1440px+) */
+@media (min-width: 1440px) {
+    :root {
+        --header-height: 4.5rem;
+        --toolbar-height: 3.5rem;
+        --responsive-padding: 1.5rem;
+        --responsive-gap: 1rem;
+    }
+}
+
+/* Desktop (1024px to 1439px) */
+@media (max-width: 1439px) and (min-width: 1024px) {
+    :root {
+        --responsive-padding: 1rem;
+        --responsive-gap: 0.75rem;
+    }
+}
+
+/* Tablet Landscape (768px to 1023px) */
+@media (max-width: 1023px) and (min-width: 768px) {
+    :root {
+        --header-height: 3.5rem;
+        --toolbar-height: 2.5rem;
+        --responsive-padding: 0.75rem;
+        --responsive-gap: 0.5rem;
+    }
+}
+
+/* Tablet Portrait and Small Laptop (640px to 767px) */
+@media (max-width: 767px) and (min-width: 640px) {
+    :root {
+        --header-height: 3rem;
+        --toolbar-height: auto;
+        --responsive-padding: 0.5rem;
+        --responsive-gap: 0.5rem;
+    }
+
+    .container {
+        padding: 0.5rem !important;
+    }
+}
+
+/* Mobile and very small screens (below 640px) */
+@media (max-width: 639px) {
+    :root {
+        --header-height: 2.5rem;
+        --responsive-padding: 0.25rem;
+        --responsive-gap: 0.25rem;
+    }
+
+    .container {
+        padding: 0.25rem !important;
+        height: 100vh !important;
+    }
+}
