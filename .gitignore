@@ -30,7 +30,7 @@ __pycache__/
 .Python
 build/
 develop-eggs/
-dist/
+# dist/
 downloads/
 eggs/
 .eggs/
@@ -298,7 +298,7 @@ jspm_packages/
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+# dist
 
 # Gatsby files
 .cache/
@@ -307,7 +307,7 @@ dist
 # public
 
 # vuepress build output
-.vuepress/dist
+# .vuepress/dist
 
 # Serverless directories
 .serverless/
