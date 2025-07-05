@@ -1,115 +1,77 @@
 // frontend/static/js/app/1-dom-elements.js
-export const chartContainer = document.getElementById('chartContainer');
-export const exchangeSelect = document.getElementById('exchange');
-export const symbolSelect = document.getElementById('symbol');
-export const intervalSelect = document.getElementById('interval');
-export const startTimeInput = document.getElementById('start_time');
-export const endTimeInput = document.getElementById('end_time');
-export const themeToggle = document.getElementById('theme-toggle');
-export const dataSummaryElement = document.getElementById('dataSummary');
-export const loadingIndicator = document.getElementById('loadingIndicator');
-export const timezoneSelect = document.getElementById('timezone');
-export const chartTypeSelect = document.getElementById('chart-type');
-export const screenshotBtn = document.getElementById('screenshot-btn');
 
-// Live mode controls
-export const liveToggle = document.getElementById('live-toggle');
+/**
+ * Centralized function to get all relevant DOM elements.
+ * This approach enhances modularity and makes it easier to manage
+ * and potentially mock DOM interactions for testing or future framework integration.
+ * @returns {Object.<string, HTMLElement|null>} An object containing references to DOM elements.
+ */
+export function getDomElements() {
+    const elements = {
+        chartContainer: document.getElementById('chartContainer'),
+        exchangeSelect: document.getElementById('exchange'),
+        symbolSelect: document.getElementById('symbol'),
+        intervalSelect: document.getElementById('interval'),
+        startTimeInput: document.getElementById('start_time'),
+        endTimeInput: document.getElementById('end_time'),
+        themeToggle: document.getElementById('theme-toggle'),
+        dataSummaryElement: document.getElementById('dataSummary'),
+        loadingIndicator: document.getElementById('loadingIndicator'),
+        timezoneSelect: document.getElementById('timezone'),
+        chartTypeSelect: document.getElementById('chart-type'),
+        screenshotBtn: document.getElementById('screenshot-btn'),
 
-// OHLC Data Legend - This is the key element for the tooltip functionality
-export const dataLegendElement = document.getElementById('data-legend');
+        // Live mode controls
+        liveToggle: document.getElementById('live-toggle'),
 
-// Drawing Tools Toolbar
-export const toolTrendLineBtn = document.getElementById('tool-trend-line');
-export const toolHorizontalLineBtn = document.getElementById('tool-horizontal-line');
-export const toolFibRetracementBtn = document.getElementById('tool-fib-retracement');
-export const toolRectangleBtn = document.getElementById('tool-rectangle');
-export const toolBrushBtn = document.getElementById('tool-brush');
-export const toolRemoveSelectedBtn = document.getElementById('tool-remove-selected');
-export const toolRemoveAllBtn = document.getElementById('tool-remove-all');
+        // OHLC Data Legend - This is the key element for the tooltip functionality
+        dataLegendElement: document.getElementById('data-legend'),
 
-// Settings Modal
-export const settingsModal = document.getElementById('settings_modal');
-export const gridColorInput = document.getElementById('setting-grid-color');
-export const watermarkInput = document.getElementById('setting-watermark-text');
-export const upColorInput = document.getElementById('setting-up-color');
-export const downColorInput = document.getElementById('setting-down-color');
-export const wickUpColorInput = document.getElementById('setting-wick-up-color');
-export const wickDownColorInput = document.getElementById('setting-wick-down-color');
-export const volUpColorInput = document.getElementById('setting-vol-up-color');
-export const volDownColorInput = document.getElementById('setting-vol-down-color');
-export const disableWicksInput = document.getElementById('setting-disable-wicks');
+        // Drawing Tools Toolbar
+        toolTrendLineBtn: document.getElementById('tool-trend-line'),
+        toolHorizontalLineBtn: document.getElementById('tool-horizontal-line'),
+        toolFibRetracementBtn: document.getElementById('tool-fib-retracement'),
+        toolRectangleBtn: document.getElementById('tool-rectangle'),
+        toolBrushBtn: document.getElementById('tool-brush'),
+        toolRemoveSelectedBtn: document.getElementById('tool-remove-selected'),
+        toolRemoveAllBtn: document.getElementById('tool-remove-all'),
 
-export const showOHLCLegendToggle = document.getElementById('setting-show-ohlc-legend');
+        // Settings Modal
+        settingsModal: document.getElementById('settings_modal'),
+        gridColorInput: document.getElementById('setting-grid-color'),
+        watermarkInput: document.getElementById('setting-watermark-text'),
+        upColorInput: document.getElementById('setting-up-color'),
+        downColorInput: document.getElementById('setting-down-color'),
+        wickUpColorInput: document.getElementById('setting-wick-up-color'),
+        wickDownColorInput: document.getElementById('setting-wick-down-color'),
+        volUpColorInput: document.getElementById('setting-vol-up-color'),
+        volDownColorInput: document.getElementById('setting-vol-down-color'),
+        disableWicksInput: document.getElementById('setting-disable-wicks'),
 
-export const candleTypeSelect = document.getElementById('candle-type-select');
+        showOHLCLegendToggle: document.getElementById('setting-show-ohlc-legend'),
 
-// NEW: Add responsive sidebar elements
-export const menuToggle = document.getElementById('menu-toggle');
-export const sidebar = document.getElementById('sidebar');
-export const sidebarOverlay = document.getElementById('sidebar-overlay');
+        candleTypeSelect: document.getElementById('candle-type-select'),
 
-// MODIFIED: Indicator Elements
-export const indicatorModal = document.getElementById('indicator_modal');
-export const indicatorSelect = document.getElementById('indicator-select');
-export const indicatorApplyBtn = document.getElementById('indicator-apply-btn');
-export const removeRegressionBtn = document.getElementById('remove-regression-btn');
-export const regressionLengthInput = document.getElementById('indicator-regression-length');
-export const lookbackPeriodsInput = document.getElementById('indicator-lookback-periods');
-export const timeframesContainer = document.getElementById('indicator-timeframes'); // <-- MODIFIED
-export const regressionTableContainer = document.getElementById('regression-table-container');
-export const regressionTable = document.getElementById('regression-table');
-export const regressionTableHead = regressionTable ? regressionTable.querySelector('thead') : null;
-export const regressionTableBody = regressionTable ? regressionTable.querySelector('tbody') : null;
+        // NEW: Add responsive sidebar elements
+        menuToggle: document.getElementById('menu-toggle'),
+        sidebar: document.getElementById('sidebar'),
+        sidebarOverlay: document.getElementById('sidebar-overlay'),
 
-// Utility function to check if an element exists
-export function elementExists(element) {
-    return element && element instanceof HTMLElement;
-}
-
-// Utility function to safely get element by ID with error handling
-export function safeGetElementById(id) {
-    const element = document.getElementById(id);
-    if (!element) {
-        console.warn(`Element with ID '${id}' not found in DOM`);
-    }
-    return element;
-}
-
-// Validation function to ensure all critical elements are present
-export function validateCriticalElements() {
-    const criticalElements = {
-        chartContainer,
-        exchangeSelect,
-        symbolSelect,
-        intervalSelect,
-        startTimeInput,
-        endTimeInput,
-        dataLegendElement,
-        // NEW: Add new elements to validation
-        menuToggle,
-        sidebar,
-        sidebarOverlay
+        // MODIFIED: Indicator Elements
+        indicatorModal: document.getElementById('indicator_modal'),
+        indicatorSelect: document.getElementById('indicator-select'),
+        indicatorApplyBtn: document.getElementById('indicator-apply-btn'),
+        removeRegressionBtn: document.getElementById('remove-regression-btn'),
+        regressionLengthInput: document.getElementById('indicator-regression-length'),
+        lookbackPeriodsInput: document.getElementById('indicator-lookback-periods'),
+        timeframesContainer: document.getElementById('indicator-timeframes'),
+        regressionTableContainer: document.getElementById('regression-table-container'),
+        regressionTable: document.getElementById('regression-table'),
     };
-    
-    const missingElements = [];
-    
-    for (const [name, element] of Object.entries(criticalElements)) {
-        if (!elementExists(element)) {
-            missingElements.push(name);
-        }
-    }
-    
-    if (missingElements.length > 0) {
-        console.error('Critical DOM elements missing:', missingElements);
-        return false;
-    }
-    
-    return true;
-}
 
-// Initialize validation on module load
-if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', validateCriticalElements);
-} else {
-    validateCriticalElements();
+    // Handle elements that might not exist initially or require a querySelector
+    elements.regressionTableHead = elements.regressionTable ? elements.regressionTable.querySelector('thead') : null;
+    elements.regressionTableBody = elements.regressionTable ? elements.regressionTable.querySelector('tbody') : null;
+
+    return elements;
 }

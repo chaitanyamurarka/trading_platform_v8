@@ -1,8 +1,10 @@
 // frontend/static/js/app/6-api-service.js
 import { getHistoricalDataUrl, getHistoricalDataChunkUrl, getHeikinAshiDataUrl, getHeikinAshiDataChunkUrl, fetchHeikinAshiData, fetchHeikinAshiChunk, fetchSymbols } from '../api.js';
 import { state, constants } from './2-state.js';
-import * as elements from './1-dom-elements.js';
+import { getDomElements } from './1-dom-elements.js';
 import { showToast, populateSymbolSelect } from './4-ui-helpers.js';
+
+const elements = getDomElements();
 import { connectToLiveDataFeed, connectToLiveHeikinAshiData, disconnectFromAllLiveFeeds, processMessageBuffer } from './9-websocket-service.js';
 import { applyAutoscaling } from './13-drawing-toolbar-listeners.js';
 

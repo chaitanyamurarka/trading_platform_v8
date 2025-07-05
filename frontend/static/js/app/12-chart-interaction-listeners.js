@@ -1,6 +1,8 @@
 // frontend/static/js/app/12-chart-interaction-listeners.js
 import { state } from './2-state.js';
-import * as elements from './1-dom-elements.js';
+import { getDomElements } from './1-dom-elements.js';
+
+const elements = getDomElements();
 import { fetchAndPrependHeikinAshiChunk, 
     fetchAndPrependTickChunk, 
     fetchAndPrependRegularCandleChunk } from './6-api-service.js';

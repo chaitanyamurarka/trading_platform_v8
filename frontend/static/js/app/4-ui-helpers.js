@@ -1,7 +1,9 @@
 // app/4-ui-helpers.js
-import * as elements from './1-dom-elements.js';
+import { getDomElements } from './1-dom-elements.js';
 import { getChartTheme } from './3-chart-options.js';
 import { state } from './2-state.js';
+
+const elements = getDomElements();
 
 
 export function setAutomaticDateTime() {

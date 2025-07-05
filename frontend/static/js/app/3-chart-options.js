@@ -1,6 +1,8 @@
 // frontend/static/js/app/3-chart-options.js
 
-import * as elements from './1-dom-elements.js';
+import { getDomElements } from './1-dom-elements.js';
+
+const elements = getDomElements();
 
 /**
  * Generates the main options object for creating the chart.

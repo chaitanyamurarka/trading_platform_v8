@@ -1,6 +1,8 @@
 // frontend/static/js/main.js
 import { state } from './app/2-state.js';
-import * as elements from './app/1-dom-elements.js';
+import { getDomElements } from './app/1-dom-elements.js';
+
+const elements = getDomElements();
 import { getChartTheme } from './app/3-chart-options.js';
 import { syncSettingsInputs, updateThemeToggleIcon, setAutomaticDateTime } from './app/4-ui-helpers.js';
 import { recreateMainSeries } from './app/5-chart-drawing.js';

@@ -1,5 +1,7 @@
 // frontend/static/js/app/11-ui-listeners.js
-import * as elements from './1-dom-elements.js';
+import { getDomElements } from './1-dom-elements.js';
+
+const elements = getDomElements();
 import { state } from './2-state.js';
 import { applyTheme, syncSettingsInputs, showToast, setAutomaticDateTime } from './4-ui-helpers.js';
 import { takeScreenshot, recreateMainSeries, applySeriesColors, applyVolumeColors } from './5-chart-drawing.js';

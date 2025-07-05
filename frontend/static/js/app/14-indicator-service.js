@@ -1,6 +1,8 @@
 // frontend/static/js/app/14-indicator-service.js
 import { state } from './2-state.js';
-import * as elements from './1-dom-elements.js';
+import { getDomElements } from './1-dom-elements.js';
+
+const elements = getDomElements();
 import { fetchRegressionData } from '../api.js';
 import { populateRegressionTable, showToast } from './4-ui-helpers.js';
 

@@ -1,7 +1,7 @@
 // frontend/static/js/app/8-responsive-handler.js
 
 import { state } from './2-state.js';
-import * as elements from './1-dom-elements.js';
+import { getDomElements } from './1-dom-elements.js';
 
 /**
  * Advanced responsive handler for TradingView-style dynamic adaptation
@@ -14,6 +14,7 @@ class ResponsiveHandler {
         this.lastKnownSize = { width: 0, height: 0 };
         this.mediaQueries = new Map();
         this.callbacks = new Set();
+        this.elements = getDomElements(); // Get DOM elements once
         
         this.init();
     }
@@ -61,15 +62,15 @@ class ResponsiveHandler {
             clearTimeout(this.observerTimeout);
             this.observerTimeout = setTimeout(() => {
                 for (const entry of entries) {
-                    if (entry.target === elements.chartContainer) {
+                    if (entry.target === this.elements.chartContainer) {
                         this.handleChartResize(entry.contentRect);
                     }
                 }
             }, 16); // ~60fps
         });
         
-        if (elements.chartContainer) {
-            this.resizeObserver.observe(elements.chartContainer);
+        if (this.elements.chartContainer) {
+            this.resizeObserver.observe(this.elements.chartContainer);
         }
     }
     
@@ -131,9 +132,9 @@ class ResponsiveHandler {
     }
     
     handleWindowResize() {
-        if (!elements.chartContainer) return;
+        if (!this.elements.chartContainer) return;
         
-        const containerRect = elements.chartContainer.getBoundingClientRect();
+        const containerRect = this.elements.chartContainer.getBoundingClientRect();
         this.handleChartResize(containerRect);
         
         this.updateResponsiveClasses();

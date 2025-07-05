@@ -1,4 +1,6 @@
-import * as elements from './1-dom-elements.js';
+import { getDomElements } from './1-dom-elements.js';
+
+const elements = getDomElements();
 import { state } from './2-state.js';
 
 export function setupDrawingToolbarListeners() {

@@ -1,6 +1,8 @@
 // frontend/static/js/app/5-chart-drawing.js
 import { state } from './2-state.js';
-import * as elements from './1-dom-elements.js';
+import { getDomElements } from './1-dom-elements.js';
+
+const elements = getDomElements();
 import { getSeriesOptions } from './3-chart-options.js';
 
 export function recreateMainSeries(type) {
