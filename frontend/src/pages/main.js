@@ -1,13 +1,12 @@
 // frontend/static/js/main.js
-import { state } from './app/2-state.js';
-import { getDomElements } from './app/1-dom-elements.js';
-
+import { state }  from '../utils/state.js';
+import { getDomElements } from '../utils/dom-elements.js';  
 const elements = getDomElements();
-import { getChartTheme } from './app/3-chart-options.js';
-import { syncSettingsInputs, updateThemeToggleIcon, setAutomaticDateTime } from './app/4-ui-helpers.js';
-import { recreateMainSeries } from './app/5-chart-drawing.js';
-import { startSession } from './app/10-session-manager.js';
-import { initializeAllEventListeners } from './app/7-event-listeners.js';
+import { getChartTheme } from '../utils/chart-options.js';  
+import { syncSettingsInputs, updateThemeToggleIcon, setAutomaticDateTime } from '../utils/ui-helpers.js';
+import { recreateMainSeries } from '../components/chart-drawing.js';
+import { startSession } from '../services/session-manager.js';
+import { initializeAllEventListeners } from '../utils/event-listeners.js';
 import { responsiveHandler } from '../utils/responsive-handler.js';
 
 function initializeNewChartObject() {

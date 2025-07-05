@@ -1,4 +1,4 @@
-import { getDomElements } from './1-dom-elements.js';
+import { getDomElements } from './dom-elements.js';
 
 const elements = getDomElements();
 import { state } from './state.js';

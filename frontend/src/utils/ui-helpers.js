@@ -1,6 +1,6 @@
 // app/4-ui-helpers.js
-import { getDomElements } from './1-dom-elements.js';
-import { getChartTheme } from './3-chart-options.js';
+import { getDomElements } from './dom-elements.js';
+import { getChartTheme } from './chart-options.js';
 import { state } from './state.js';
 
 const elements = getDomElements();

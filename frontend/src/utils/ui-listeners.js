@@ -1,11 +1,11 @@
 // frontend/static/js/app/11-ui-listeners.js
-import { getDomElements } from './1-dom-elements.js';
+import { getDomElements } from './dom-elements.js';
 
 const elements = getDomElements();
-import { state } from './2-state.js';
-import { applyTheme, syncSettingsInputs, showToast, setAutomaticDateTime } from './4-ui-helpers.js';
-import { takeScreenshot, recreateMainSeries, applySeriesColors, applyVolumeColors } from './5-chart-drawing.js';
-import { loadChartData } from './6-api-service.js';
+import { state } from './state.js';
+import { applyTheme, syncSettingsInputs, showToast, setAutomaticDateTime } from './ui-helpers.js';
+import { takeScreenshot, recreateMainSeries, applySeriesColors, applyVolumeColors } from '../components/chart-drawing.js';
+import { loadChartData } from '../services/api-service.js';
 import { connectToLiveDataFeed, connectToLiveHeikinAshiData, disconnectFromAllLiveFeeds } from '../services/websocket-service.js';
 
 export function setupUiListeners() {

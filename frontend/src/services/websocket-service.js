@@ -1,6 +1,6 @@
 // chaitanyamurarka/trading_platform_v7/trading_platform_v7-e2d358352a61cb7a1309edf91f97d1e2f22f6d7b/frontend/static/js/app/9-websocket-service.js
-import { state } from './2-state.js';
-import { getDomElements } from './1-dom-elements.js';
+import { state } from '../utils/state.js';
+import { getDomElements } from '../utils/dom-elements.js';
 
 const elements = getDomElements();
 import { showToast } from '../utils/ui-helpers.js';

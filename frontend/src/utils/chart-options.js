@@ -30,6 +30,7 @@ export const chartOptions = (theme) => {
         },
         rightPriceScale: {
             borderColor: gridColor,
+            autoScale: true, // Enable auto-scaling for the price scale
         },
         timeScale: {
             timeVisible: true,

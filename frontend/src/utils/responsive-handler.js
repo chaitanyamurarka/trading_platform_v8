@@ -1,6 +1,6 @@
 // frontend/static/js/app/8-responsive-handler.js
 
-import { state } from './2-state.js';
+import { state } from './state.js';
 import { getDomElements } from './dom-elements.js';
 
 /**

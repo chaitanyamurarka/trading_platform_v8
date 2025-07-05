@@ -34,6 +34,7 @@ app = FastAPI(
 script_dir = os.path.dirname(__file__)
 frontend_dir = os.path.join(os.path.dirname(script_dir), "frontend")
 
+app.mount("/src", StaticFiles(directory=os.path.join(frontend_dir, "src")), name="src")
 app.mount("/static", StaticFiles(directory=os.path.join(frontend_dir,"public", "static")), name="static")
 app.mount("/dist", StaticFiles(directory=os.path.join(frontend_dir, "dist")), name="dist")
 

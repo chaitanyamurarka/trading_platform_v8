@@ -1,7 +1,7 @@
-import { getDomElements } from './1-dom-elements.js';
+import { getDomElements } from './dom-elements.js';
 
 const elements = getDomElements();
-import { state } from './2-state.js';
+import { state } from './state.js';
 import { runRegressionAnalysis, removeRegressionAnalysis } from '../services/indicator-service.js';
 
 export function setupIndicatorListeners() {

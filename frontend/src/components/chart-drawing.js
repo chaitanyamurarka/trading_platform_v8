@@ -1,6 +1,6 @@
 // frontend/static/js/app/5-chart-drawing.js
-import { state } from './2-state.js';
-import { getDomElements } from './1-dom-elements.js';
+import { state } from '../utils/state.js';
+import { getDomElements } from '../utils/dom-elements.js';
 
 const elements = getDomElements();
 import { getSeriesOptions } from '../utils/chart-options.js';
