@@ -1,0 +1,40 @@
+/* src/components/Chart/Chart.module.css */
+.chartWrapper {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.chartContainer {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.dataLegend {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  z-index: 10;
+  padding: 12px;
+  background: rgba(var(--b2), 0.95);
+  backdrop-filter: blur(8px);
+  border-radius: 8px;
+  border: 1px solid rgba(var(--bc), 0.1);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+
+.loadingIndicator {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--b1), 0.5);
+  backdrop-filter: blur(4px);
+  z-index: 20;
+}
